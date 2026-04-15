@@ -20,8 +20,32 @@ args = vars(ap.parse_args())
 # define the lower and upper boundaries of the "green"
 # ball in the HSV color space, then initialize the
 # list of tracked points
-greenLower = (29, 86, 6)
-greenUpper = (64, 255, 255)
+print("Please enter the color of the object you want to track.")
+print("1 Red, 2 Oragne, 3 Yellow, 4 Green, 5 Blue, 6 Purple")
+color = int(input("Enter the number of the color: "))
+if color == 1:
+    greenLower = (0, 86, 6)
+    greenUpper = (16, 255, 255)
+elif color == 2:
+    greenLower = (17, 86, 6)
+    greenUpper = (23, 255, 255)
+elif color == 3:
+    greenLower = (24, 86, 6)
+    greenUpper = (32, 255, 255)
+elif color == 4:
+    greenLower = (33, 86, 6)
+    greenUpper = (70, 255, 255)
+elif color == 5:
+    greenLower = (71, 86, 6)
+    greenUpper = (125, 255, 255)
+elif color == 6:
+    greenLower = (126, 86, 6)
+    greenUpper = (143, 255, 255)
+else:
+    print("Invalid color")
+    exit()
+# greenLower = (29, 86, 6)
+# greenUpper = (64, 255, 255)
 pts = deque(maxlen=args["buffer"])
 # if a video path was not supplied, grab the reference
 # to the webcam
