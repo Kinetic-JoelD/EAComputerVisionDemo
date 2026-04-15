@@ -20,8 +20,27 @@ args = vars(ap.parse_args())
 # define the lower and upper boundaries of the "green"
 # ball in the HSV color space, then initialize the
 # list of tracked points
-greenLower = (29, 86, 6)
-greenUpper = (64, 255, 255)
+
+# redLower = (170, 86, 6)
+# redUpper = (250, 255, 255)
+
+# redLower = (170, 86, 6)
+# redUpper = (250, 255, 255)
+
+# greenLower = (29, 86, 6)
+# greenUpper = (64, 255, 255)
+
+# blueLower = (85, 86, 6)
+# blueUpper = (140, 255, 255)
+color_ranges = {
+	"green": ((29, 86, 6), (64, 255, 255)),
+	"red": ((170, 86, 6), (180, 255, 255)),
+	"orange": ((10, 100, 20), (25, 255, 255)),
+	"blue": ((90, 60, 0), (121, 255, 255))
+}
+current_color = 'green'
+
+
 pts = deque(maxlen=args["buffer"])
 # if a video path was not supplied, grab the reference
 # to the webcam
@@ -44,6 +63,8 @@ while True:
 	# then we have reached the end of the video
 	if frame is None:
 		break
+	#flip camera
+	frame = cv2.flip(frame, 1)
 	# resize the frame, blur it, and convert it to the HSV
 	# color space
 	frame = imutils.resize(frame, width=600)
@@ -52,7 +73,11 @@ while True:
 	# construct a mask for the color "green", then perform
 	# a series of dilations and erosions to remove any small
 	# blobs left in the mask
-	mask = cv2.inRange(hsv, greenLower, greenUpper)
+
+	# mask = cv2.inRange(hsv, redLower, redUpper)
+	lower, upper = color_ranges[current_color]
+	mask = cv2.inRange(hsv, lower, upper)
+
 	mask = cv2.erode(mask, None, iterations=2)
 	mask = cv2.dilate(mask, None, iterations=2)
 
@@ -67,6 +92,13 @@ while True:
 		# find the largest contour in the mask, then use
 		# it to compute the minimum enclosing circle and
 		# centroid
+
+		# for c in cnts:
+			
+		
+		
+		
+		
 		c = max(cnts, key=cv2.contourArea)
 		((x, y), radius) = cv2.minEnclosingCircle(c)
 		M = cv2.moments(c)
@@ -98,6 +130,21 @@ while True:
 	# if the 'q' key is pressed, stop the loop
 	if key == ord("q"):
 		break
+
+
+	if key == ord("1"):
+		current_color = "green"
+		print("Tracking GREEN")
+	elif key == ord("2"):
+		current_color = "red"
+		print("Tracking RED")
+	elif key == ord("3"):
+		current_color = "orange"
+		print("Tracking ORANGE")
+	elif key == ord("4"):
+		current_color = "blue"
+		print("Tracking BLUE")
+
 # if we are not using a video file, stop the camera video stream
 if not args.get("video", False):
 	vs.stop()
