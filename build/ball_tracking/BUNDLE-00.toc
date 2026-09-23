@@ -1,0 +1,3 @@
+([('ball_tracking',
+   '/Users/ellistonhowells/EAPT/EAComputerVisionDemo/dist/ball_tracking',
+   'EXECUTABLE')],)
