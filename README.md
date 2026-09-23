@@ -1,1 +1,1 @@
-Hello World
+This project was designed to be used for UConn's Engineering Ambassadors Impact Fellows in their visits to local K-12 students. It is intended to teach students about computer vision and its applications, including traffic management and sports analytics.
