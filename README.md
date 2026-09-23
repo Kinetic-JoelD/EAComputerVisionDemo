@@ -1,1 +1,3 @@
-This project was designed to be used for UConn's Engineering Ambassadors Impact Fellows in their visits to local K-12 students. It is intended to teach students about computer vision and its applications, including traffic management and sports analytics.
+This project was developed for UConn’s Engineering Ambassadors Impact Fellows to use during outreach visits to local K-12 classrooms. It introduces students to computer vision and real-world applications like traffic management and sports analytics. During the demonstration, number keys toggle which color is tracked, allowing students to wave colored balls to draw on screen and explore how cameras process movement.
+
+Currently, only ball_tracking.py needs to be run for the demo to work. Future plans include a browser-based version so the activity can run on any device and be easily led by Ambassadors without extensive Python experience.
